@@ -1,3 +1,26 @@
-<h1>Blog 2</h1>
-<p>Bài viết về công nghệ 2</p>
-<a href="/">Back</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 2 - Du lịch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1A2980; --secondary: #26D0CE; }
+        body { margin: 0; font-family: 'Outfit', sans-serif; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;}
+        .glass-panel { max-width: 800px; background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: fadein 1s ease; }
+        @keyframes fadein { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-img { width: 100%; border-radius: 12px; margin: 20px 0; object-fit: cover; height: 300px; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 25px; background: rgba(255,255,255,0.1); border-radius: 30px; text-decoration: none; color: white; transition: 0.3s; border: 1px solid rgba(255,255,255,0.2); }
+        .back-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <div class="glass-panel">
+        <h1>Nhật ký dạo quanh thế giới</h1>
+        <p>Thế giới có thật nhiều điều thú vị đang chờ bạn khám phá. Trải nghiệm những không gian, văn hóa và con người mới lạ sẽ giúp cuộc sống thêm ý nghĩa.</p>
+        <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=2070&auto=format&fit=crop" alt="Travel" class="hero-img">
+        <a href="/" class="back-btn">← Quay lại trang chủ</a>
+    </div>
+</body>
+</html>

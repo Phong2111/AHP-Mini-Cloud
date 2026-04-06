@@ -1,20 +1,32 @@
 [
-    {
-        "id": 1,
-        "name": "Phong",
-        "major": "IT",
-        "gpa": 3.5
-    },
-    {
-        "id": 2,
-        "name": "An",
-        "major": "CS",
-        "gpa": 3.2
-    },
-    {
-        "id": 3,
-        "name": "Binh",
-        "major": "SE",
-        "gpa": 3.8
-    }
+  {
+    "id": 1,
+    "name": "Nguyen Van A",
+    "major": "Computer Science",
+    "gpa": 3.8
+  },
+  {
+    "id": 2,
+    "name": "Tran Thi B",
+    "major": "Information Technology",
+    "gpa": 3.5
+  },
+  {
+    "id": 3,
+    "name": "Le Van C",
+    "major": "Software Engineering",
+    "gpa": 3.9
+  },
+  {
+    "id": 4,
+    "name": "Phan Thi D",
+    "major": "Data Science",
+    "gpa": 3.6
+  },
+  {
+    "id": 5,
+    "name": "Hoang Van E",
+    "major": "Information Security",
+    "gpa": 3.7
+  }
 ]

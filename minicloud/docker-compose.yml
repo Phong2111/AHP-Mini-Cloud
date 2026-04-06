@@ -2,19 +2,33 @@ version: "3.9"
 
 networks:
   cloud-net:
+    name: cloud-net
 
 
 services:
 
-  web-frontend-server:
+  web-frontend-server1:
     build: ./web-frontend-server
+    container_name: web-frontend-server1
     ports:
-      - "8080:80"
+      - "8084:80"
+    networks:
+      - cloud-net
+
+  web-frontend-server2:
+    build: ./web-frontend-server
+    container_name: web-frontend-server2
+    ports:
+      - "8083:80"
     networks:
       - cloud-net
 
   application-backend-server:
     build: ./application-backend-server
+    container_name: application-backend-server
+    environment:
+      OIDC_ISSUER: "http://authentication-identity-server:8080/realms/master"
+      OIDC_AUDIENCE: "myapp"
     ports:
       - "8085:8081"
     networks:
@@ -22,28 +36,34 @@ services:
 
   relational-database-server:
     image: mariadb:11
+    container_name: relational-database-server
     environment:
       MARIADB_ROOT_PASSWORD: root
     volumes:
       - ./relational-database-server/init:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "13306:3306"
     networks:
       - cloud-net
 
   authentication-identity-server:
     image: quay.io/keycloak/keycloak
+    container_name: authentication-identity-server
     command: start-dev
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HOSTNAME: "localhost"
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
     ports:
-      - "8081:8080"
+      - "8181:8080"
     networks:
       - cloud-net
 
   object-storage-server:
     image: minio/minio
+    container_name: object-storage-server
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: minioadmin
@@ -56,8 +76,21 @@ services:
     networks:
       - cloud-net
 
+  internal-dns-server:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: internal-dns-server
+    ports:
+      - "1053:53/udp"
+    volumes:
+      - ./internal-dns-server/named.conf.options:/etc/bind/named.conf.options:ro
+      - ./internal-dns-server/named.conf.local:/etc/bind/named.conf.local:ro
+      - ./internal-dns-server/db.cloud.local:/etc/bind/db.cloud.local:ro
+    networks:
+      - cloud-net
+
   monitoring-node-exporter-server:
     image: prom/node-exporter
+    container_name: monitoring-node-exporter-server
     ports:
       - "9100:9100"
     networks:
@@ -65,6 +98,7 @@ services:
 
   monitoring-prometheus-server:
     image: prom/prometheus
+    container_name: monitoring-prometheus-server
     volumes:
       - ./monitoring-prometheus-server/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
@@ -74,19 +108,27 @@ services:
 
   monitoring-grafana-dashboard-server:
     image: grafana/grafana
+    container_name: monitoring-grafana-dashboard-server
     ports:
       - "3000:3000"
+    volumes:
+      - ./monitoring-grafana-dashboard-server/provisioning:/etc/grafana/provisioning
+      - ./monitoring-grafana-dashboard-server/dashboards:/var/lib/grafana/dashboards
     networks:
       - cloud-net
 
   api-gateway-proxy-server:
-    image: nginx
+    image: nginx:stable
+    container_name: api-gateway-proxy-server
     depends_on:
-      - web-frontend-server
+      - web-frontend-server1
+      - web-frontend-server2
       - application-backend-server
+      - authentication-identity-server
     ports:
       - "80:80"
     volumes:
       - ./api-gateway-proxy-server/nginx.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped
     networks:
       - cloud-net

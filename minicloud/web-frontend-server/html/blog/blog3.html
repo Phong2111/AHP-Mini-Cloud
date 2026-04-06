@@ -1,3 +1,26 @@
-<h1>Blog 3</h1>
-<p>Bài viết về công nghệ 3</p>
-<a href="/">Back</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 3 - Học tập</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #cc2b5e; --secondary: #753a88; }
+        body { margin: 0; font-family: 'Outfit', sans-serif; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;}
+        .glass-panel { max-width: 800px; background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: fadein 1s ease; }
+        @keyframes fadein { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-img { width: 100%; border-radius: 12px; margin: 20px 0; object-fit: cover; height: 300px; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 25px; background: rgba(255,255,255,0.1); border-radius: 30px; text-decoration: none; color: white; transition: 0.3s; border: 1px solid rgba(255,255,255,0.2); }
+        .back-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <div class="glass-panel">
+        <h1>Cách học hiệu quả</h1>
+        <p>Học tập là một quá trình liên tục và đòi hỏi sự kiên nhẫn. Tìm ra phương pháp học hợp lý sẽ giúp bạn rút ngắn thời gian và tối đa hóa khả năng tiếp thu.</p>
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" alt="Study" class="hero-img">
+        <a href="/" class="back-btn">← Quay lại trang chủ</a>
+    </div>
+</body>
+</html>

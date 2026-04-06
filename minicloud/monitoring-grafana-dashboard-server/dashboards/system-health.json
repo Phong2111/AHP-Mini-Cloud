@@ -1,0 +1,28 @@
+{
+  "title": "System Health of MSSV",
+  "timezone": "browser",
+  "schemaVersion": 16,
+  "panels": [
+    {
+      "title": "System CPU Usage",
+      "type": "timeseries",
+      "datasource": "Prometheus",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [{ "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)", "refId": "A" }]
+    },
+    {
+      "title": "Memory Usage",
+      "type": "timeseries",
+      "datasource": "Prometheus",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [{ "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes", "refId": "A" }]
+    },
+    {
+      "title": "Network Traffic",
+      "type": "timeseries",
+      "datasource": "Prometheus",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 8 },
+      "targets": [{ "expr": "rate(node_network_receive_bytes_total[5m])", "legendFormat": "In" }, { "expr": "rate(node_network_transmit_bytes_total[5m])", "legendFormat": "Out" }]
+    }
+  ]
+}
