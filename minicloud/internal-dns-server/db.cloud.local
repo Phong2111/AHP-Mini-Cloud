@@ -12,4 +12,4 @@ $TTL 1H
 ns  IN A 172.20.0.5
 
 web-frontend-server1 IN A 172.20.0.2
-web-frontend-server2 IN A 172.20.0.9
+web-frontend-server2 IN A 172.20.0.9
