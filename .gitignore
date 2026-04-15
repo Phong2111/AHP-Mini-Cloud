@@ -1,0 +1,19 @@
+# MinIO files
+xl.meta
+.minio.sys/
+
+# Object Storage Data
+minicloud/object-storage-server/data/
+
+# Logs
+hethong-minicloud-logs.txt
+ping_test_results.txt
+db_test.txt
+api_hello.txt
+api_student.txt
+token_response.json
+
+# Other runtime files
+*.tmp
+__pycache__/
+*.pyc

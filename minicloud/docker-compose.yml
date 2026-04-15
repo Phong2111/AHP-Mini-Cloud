@@ -13,6 +13,7 @@ services:
       - "8084:80"
     networks:
       - cloud-net
+    restart: unless-stopped
 
   web-frontend-server2:
     build: ./web-frontend-server
@@ -21,6 +22,7 @@ services:
       - "8083:80"
     networks:
       - cloud-net
+    restart: unless-stopped
 
   application-backend-server:
     build: ./application-backend-server
@@ -32,6 +34,7 @@ services:
       - "8085:8081"
     networks:
       - cloud-net
+    restart: unless-stopped
 
   relational-database-server:
     image: mariadb:11
@@ -44,6 +47,7 @@ services:
       - "13306:3306"
     networks:
       - cloud-net
+    restart: unless-stopped
 
   authentication-identity-server:
     image: quay.io/keycloak/keycloak
@@ -59,6 +63,7 @@ services:
       - "8181:8080"
     networks:
       - cloud-net
+    restart: unless-stopped
 
   object-storage-server:
     image: minio/minio
@@ -74,12 +79,13 @@ services:
       - "9001:9001"
     networks:
       - cloud-net
+    restart: unless-stopped
 
   internal-dns-server:
     image: internetsystemsconsortium/bind9:9.18
     container_name: internal-dns-server
     ports:
-      - "53:53/udp"
+      - "1053:53/udp"
     volumes:
       - ./internal-dns-server/named.conf:/etc/bind/named.conf:ro
       - ./internal-dns-server/named.conf.options:/etc/bind/named.conf.options:ro
@@ -87,6 +93,7 @@ services:
       - ./internal-dns-server/db.cloud.local:/etc/bind/db.cloud.local:ro
     networks:
       - cloud-net
+    restart: unless-stopped
 
   monitoring-node-exporter-server:
     image: prom/node-exporter
@@ -95,6 +102,7 @@ services:
       - "9100:9100"
     networks:
       - cloud-net
+    restart: unless-stopped
 
   monitoring-prometheus-server:
     image: prom/prometheus
@@ -105,6 +113,7 @@ services:
       - "9090:9090"
     networks:
       - cloud-net
+    restart: unless-stopped
 
   monitoring-grafana-dashboard-server:
     image: grafana/grafana
@@ -116,6 +125,7 @@ services:
       - ./monitoring-grafana-dashboard-server/dashboards:/var/lib/grafana/dashboards
     networks:
       - cloud-net
+    restart: unless-stopped
 
   api-gateway-proxy-server:
     image: nginx:stable

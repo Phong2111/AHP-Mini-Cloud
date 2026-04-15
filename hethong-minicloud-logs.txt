@@ -1,0 +1,27 @@
+﻿=== PING TEST LOG - 2026-04-16 00:38:19 ===
+Từ container: application-backend-server
+
+web-frontend-server1              OK => 172.22.0.5
+web-frontend-server2              OK => 172.22.0.3
+relational-database-server        OK => 172.22.0.10
+authentication-identity-server    OK => 172.22.0.6
+object-storage-server             OK => 172.22.0.8
+internal-dns-server               OK => 172.22.0.11
+monitoring-prometheus-server      OK => 172.22.0.9
+monitoring-grafana-dashboard-server OK => 172.22.0.7
+monitoring-node-exporter-server   OK => 172.22.0.4
+api-gateway-proxy-server          OK => 172.22.0.12
+
+=== DIG TEST LOG ===
+app-backend.cloud.local   => 172.22.0.2  (application-backend-server)
+minio.cloud.local         => 172.22.0.8  (object-storage-server)
+keycloak.cloud.local      => 172.22.0.6  (authentication-identity-server)
+web-frontend-server1.cloud.local => 172.22.0.5
+web-frontend-server2.cloud.local => 172.22.0.3
+
+=== CRUD DB TEST ===
+GET /db/students => 3 bản ghi từ studentdb.students (MariaDB)
+
+=== MINIO TEST ===
+profile-pics/avatar.jpg    => uploaded OK (8.78 KiB)
+documents/baocao-dotán.pdf => uploaded OK (50 B)

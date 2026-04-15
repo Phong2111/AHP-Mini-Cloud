@@ -1,6 +1,6 @@
 $TTL 1H
 @   IN SOA ns.cloud.local. admin.cloud.local. (
-        2       ; tăng serial
+        3       ; serial
         1H
         15M
         1W
@@ -9,7 +9,10 @@ $TTL 1H
 
 @   IN NS ns.cloud.local.
 
-ns  IN A 172.20.0.5
+ns                   IN A 172.22.0.11
 
-web-frontend-server1 IN A 172.20.0.2
-web-frontend-server2 IN A 172.20.0.9
+web-frontend-server1 IN A 172.22.0.5
+web-frontend-server2 IN A 172.22.0.3
+app-backend          IN A 172.22.0.2
+minio                IN A 172.22.0.8
+keycloak             IN A 172.22.0.6
